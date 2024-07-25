@@ -100,7 +100,6 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
 
   }
 
-
   export async function deleteInvoice(id: string) {
     try{
         await sql`DELETE FROM invoices WHERE id = ${id}`;
@@ -117,14 +116,15 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
 
 
 
-
   export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
   ) {
     try {
       await signIn('credentials', formData);
+    //   redirect('/dashboard');
     } catch (error) {
+        console.log({error})
       if (error instanceof AuthError) {
         switch (error.type) {
           case 'CredentialsSignin':
